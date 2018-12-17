@@ -17,17 +17,16 @@ if ($data){
 }*/
 class WxReFund
 {
-    const NOTIFY = '';   //回调通知地址需要更改成你自己服务器的地址
-    const REFUNDURl = "https://api.mch.weixin.qq.com/secapi/pay/refund";//微信退款接口url
-
     protected $mchid;
     protected $appid;
     protected $appKey;
     protected $apiKey;
+    const NOTIFY = '';   //回调通知地址需要更改成你自己服务器的地址
+    const REFUNDURl = "https://api.mch.weixin.qq.com/secapi/pay/refund";//微信退款接口url
 
     public function __construct($mchid,$appid,$appKey,$apiKey) {
-       $this->mchid  = $mchid;
-       $this->appid  = $appid;
+       $this->mchid  = $mchid; //商户id
+       $this->appid  = $appid; //appid
        $this->appKey = $appKey;//微信支付申请对应的小程序)的appSecret
        $this->apiKey = $apiKey;//https://pay.weixin.qq.com 帐户设置-安全设置-API安全-API密钥-设置API密钥
     }
