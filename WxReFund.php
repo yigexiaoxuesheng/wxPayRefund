@@ -1,5 +1,5 @@
 <?php
-
+//注意:证书目录需要根据自己的实际目录进行填写
 //退款需要提供的参数
 /*$params = array(
     'nonce_str'     => md5(time()), //随机串
@@ -93,14 +93,14 @@ class WxReFund
     //post 字符串到接口
     public function postStr($url,$postfields){
         $ch = curl_init();
-        $params[CURLOPT_URL] = $url;    //请求url地址
-        $params[CURLOPT_HEADER] = false; //是否返回响应头信息
+        $params[CURLOPT_URL]            = $url; //请求url地址
+        $params[CURLOPT_HEADER]         = false;//是否返回响应头信息
         $params[CURLOPT_RETURNTRANSFER] = true; //是否将结果返回
         $params[CURLOPT_FOLLOWLOCATION] = true; //是否重定向
-        $params[CURLOPT_POST] = true;
+        $params[CURLOPT_POST]           = true;
         $params[CURLOPT_SSL_VERIFYPEER] = false;//禁用证书校验
-	    $params[CURLOPT_SSL_VERIFYHOST] = false;
-        $params[CURLOPT_POSTFIELDS] = $postfields;
+	$params[CURLOPT_SSL_VERIFYHOST] = false;
+        $params[CURLOPT_POSTFIELDS]     = $postfields;
         curl_setopt_array($ch, $params); //传入curl参数
         $content = curl_exec($ch); //执行
         curl_close($ch); //关闭连接
@@ -111,20 +111,20 @@ class WxReFund
     public function sendRefundPostStr($url,$postfields)
     {
         $ch = curl_init();
-        $params[CURLOPT_URL] = $url;    //请求url地址
-        $params[CURLOPT_HEADER] = false; //是否返回响应头信息
+        $params[CURLOPT_URL]            = $url; //请求url地址
+        $params[CURLOPT_HEADER]         = false;//是否返回响应头信息
         $params[CURLOPT_RETURNTRANSFER] = true; //是否将结果返回
         $params[CURLOPT_FOLLOWLOCATION] = true; //是否重定向
         $params[CURLOPT_POST] = true;
         $params[CURLOPT_SSL_VERIFYPEER] = false;//禁用证书校验
         $params[CURLOPT_SSL_VERIFYHOST] = false;
         //以下是证书相关代码
-        $params[CURLOPT_SSLCERTTYPE] = 'PEM';
-        $params[CURLOPT_SSLCERT] =  FCPATH.'cert/apiclient_cert.pem';//证书目录
-        $params[CURLOPT_SSLKEYTYPE] = 'PEM';
-        $params[CURLOPT_SSLKEY] = FCPATH.'cert/apiclient_key.pem';//证书目录
+        $params[CURLOPT_SSLCERTTYPE]    = 'PEM';
+        $params[CURLOPT_SSLCERT]        =  FCPATH.'cert/apiclient_cert.pem';//证书目录,根据自己目录进行修改
+        $params[CURLOPT_SSLKEYTYPE]     = 'PEM';
+        $params[CURLOPT_SSLKEY]         = FCPATH.'cert/apiclient_key.pem';//证书目录,根据自己目录进行修改
 
-        $params[CURLOPT_POSTFIELDS] = $postfields;
+        $params[CURLOPT_POSTFIELDS]     = $postfields;
         curl_setopt_array($ch, $params); //传入curl参数
         $content = curl_exec($ch); //执行
         curl_close($ch); //关闭连接
